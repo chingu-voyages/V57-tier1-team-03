@@ -35,7 +35,7 @@ your repo access and to practice PR'ing with your team _before_ you start
 coding!
 
 - Nikola Kojević: [GitHub](https://github.com/n-kojevic) / [LinkedIn](https://www.linkedin.com/in/nikola-kojevic-30a98a121/)
-- Teammate name #2: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Eleazer Abbey: [GitHub](https://github.com/abbey-eleazer) / [LinkedIn](https://linkedin.com/in/eleazer-abbey-19b42b2a3/)
 
   ...
 
