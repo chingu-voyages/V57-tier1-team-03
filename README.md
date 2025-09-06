@@ -36,7 +36,4 @@ coding!
 
 - Nikola Kojević: [GitHub](https://github.com/n-kojevic) / [LinkedIn](https://www.linkedin.com/in/nikola-kojevic-30a98a121/)
 - Eleazer Abbey: [GitHub](https://github.com/abbey-eleazer) / [LinkedIn](https://linkedin.com/in/eleazer-abbey-19b42b2a3/)
-
-  ...
-
-- Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Tiffany Ugwunebo: [GitHub](https://github.com/Ahny678) / [LinkedIn](https://www.linkedin.com/in/tiffany-ugwunebo-1a59372a6/)
