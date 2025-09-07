@@ -1,5 +1,13 @@
 # PR's Status Board
 
+## Table of contents
+
+* [Overview](#overview)
+* [Features](#features)
+* [How to run PRs Status Board](#how-to-run-prs-status-board)
+* [Dependencies](#dependencies)
+* [Our Team](#our-team)
+
 ## Overview
 
 The PRs Status Board an app designed to help a development team to get their GitHub Pull Requests (PRs) reviewed in a timely manner.
@@ -30,6 +38,11 @@ This project includes:
 - [ ] Integration with [GitHub](https://github.com) allows the app to pull PR data directly and provide a unified interface, It also simplifies the workflow and ensures the information is always up-to-date.
 - [ ] Real time notifications to reviewers when a new PR is ready, when a comment is made, or when a change is requested.
 
+
+## How to run PRs Status Board
+
+
+## Dependencies
 ## Our Team
 
 - Nikola Kojević: [GitHub](https://github.com/n-kojevic) / [LinkedIn](https://www.linkedin.com/in/nikola-kojevic-30a98a121/)
