@@ -2,7 +2,7 @@
 
 ## Overview
 
-The PRs Status Board is a app that helps teams to get their GitHub Pull Requests (PRs) reviewed in a timely manner.
+The PRs Status Board an app designed to help a development team to get their GitHub Pull Requests (PRs) reviewed in a timely manner.
 This app helps teams track current PR's that are waiting review, as well as the history of PR's completed by the team.
 
 
