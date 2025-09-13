@@ -1,9 +1,10 @@
+import Header from "./components/Header";
+
 function App() {
   return (
     <>
-      <h1>PRs Status Board</h1>
+      <Header />
 
-      <p>Development begins!</p>
     </>
   );
 }
