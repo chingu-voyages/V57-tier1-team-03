@@ -4,15 +4,20 @@ import Illustration6 from "../assets/Illustration6.png";
 import Illustration3 from "../assets/Illustration3.png";
 import Illustration1 from "../assets/Illustration1.png";
 import Illustration2 from "../assets/Illustration2.png";
+import Illustration4 from "../assets/Illustration4.png";
+
 export default function HeroSection() {
   return (
-    <section className={styles.hero}>
+    <section
+      className={styles.hero}
+      style={{ backgroundImage: `url(${Illustration4})` }}
+    >
       <div className={styles.container}>
         {/* Left stats card  */}
         <img
           src={Illustration5}
           alt="GitHub PR Stats"
-          className={styles.statsCard}
+          className={`${styles.statsCard} ${styles.imgCard}`}
         />
 
         {/* Hero Text */}
@@ -32,19 +37,33 @@ export default function HeroSection() {
         <img
           src={Illustration6}
           alt="PR Tracker"
-          className={styles.trackerCard}
+          className={`${styles.trackerCard} ${styles.imgCard}`}
         />
       </div>
 
       {/* Bottom Cards */}
       <div className={styles.cards}>
-        <img
-          src={Illustration3}
-          alt="Create Pull Request"
-          className={styles.card}
-        />
-        <img src={Illustration1} alt="Add Feature" className={styles.card} />
-        <img src={Illustration2} alt="Fix Bug" className={styles.card} />
+        <div className={styles.cardWrapper}>
+          <img
+            src={Illustration3}
+            alt="Create Pull Request"
+            className={`${styles.card} ${styles.imgCard}`}
+          />
+        </div>
+        <div className={`${styles.cardWrapper} ${styles.middleCard}`}>
+          <img
+            src={Illustration1}
+            alt="Add Feature"
+            className={`${styles.card} ${styles.imgCard}`}
+          />
+        </div>
+        <div className={styles.cardWrapper}>
+          <img
+            src={Illustration2}
+            alt="Fix Bug"
+            className={`${styles.card} ${styles.imgCard}`}
+          />
+        </div>
       </div>
     </section>
   );
