@@ -1,0 +1,12 @@
+.hero {
+  background-image: url("/assets/Illustration4.png");
+}
+.statsCard {
+  width: 260px;
+}
+.trackerCard {
+  width: 180px;
+}
+.card {
+  width: 300px;
+}
