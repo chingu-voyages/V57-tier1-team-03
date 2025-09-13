@@ -6,11 +6,11 @@ import React from 'react'
 const MainLayout = () => {
   return (
     <>
-     <Header />
-     <Outlet />
-     <Footer />
+        <Header />
+        <Outlet />
+        <Footer />
     </>
-  )
+  );
 }
 
 export default MainLayout
