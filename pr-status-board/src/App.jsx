@@ -3,9 +3,7 @@ function App() {
   return (
     <>
       <HomePage />
-      <h1>PRs Status Board</h1>
-
-      <p>Development begins!</p>
+      
     </>
   );
 }
