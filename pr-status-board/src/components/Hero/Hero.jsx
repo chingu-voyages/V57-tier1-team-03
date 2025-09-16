@@ -1,10 +1,10 @@
 import styles from "./Hero.module.css";
-import Illustration5 from "../assets/Illustration5.png";
-import Illustration6 from "../assets/Illustration6.png";
-import Illustration3 from "../assets/Illustration3.png";
-import Illustration1 from "../assets/Illustration1.png";
-import Illustration2 from "../assets/Illustration2.png";
-import Illustration4 from "../assets/Illustration4.png";
+import Illustration5 from "../../assets/Illustration5.png";
+import Illustration6 from "../../assets/Illustration6.png";
+import Illustration3 from "../../assets/Illustration3.png";
+import Illustration1 from "../../assets/Illustration1.png";
+import Illustration2 from "../../assets/Illustration2.png";
+import Illustration4 from "../../assets/Illustration4.png";
 
 export default function HeroSection() {
   return (
