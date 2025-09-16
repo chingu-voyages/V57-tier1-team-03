@@ -1,6 +1,29 @@
 import styles from "./Body.module.css";
-
+import leftImg from "../../assets/DarkChart.png";
+import iconImg from "../../assets/Content.png";
 export default function BodySection() {
+  const items = [
+    {
+      goal: "Goal one",
+      summary: "Summary of goal one",
+    },
+    {
+      goal: "Goal two",
+      summary: "Summary of goal two",
+    },
+    {
+      goal: "Goal three",
+      summary: "Summary of goal three",
+    },
+    {
+      goal: "Goal four",
+      summary: "Summary of goal four",
+    },
+    {
+      goal: "Goal five",
+      summary: "Summary of goal five",
+    },
+  ];
   return (
     <section className={styles.body}>
       <div className={styles.container}>
@@ -14,18 +37,8 @@ export default function BodySection() {
 
           {/* Chart Card */}
           <div className={styles.chartCard}>
-            <img
-              src="/images/pr-chart.png"
-              alt="PR Chart"
-              className={styles.chartImage}
-            />
-            <div className={styles.chartLabels}>
-              <span>Open PRs: 21</span>
-              <span>Closed PRs: 16</span>
-              <span>Merged PRs: 4</span>
-            </div>
+            <img src={leftImg} alt="PR Chart" className={styles.chartImage} />
           </div>
-
           <p className={styles.subtext}>
             Monitor your pull requests effortlessly and keep your data organized
           </p>
@@ -33,31 +46,10 @@ export default function BodySection() {
 
         {/* Right side: Process Steps */}
         <div className={styles.right}>
-          {[
-            {
-              goal: "Goal one",
-              summary: "Summary of goal one",
-            },
-            {
-              goal: "Goal two",
-              summary: "Summary of goal two",
-            },
-            {
-              goal: "Goal three",
-              summary: "Summary of goal three",
-            },
-            {
-              goal: "Goal four",
-              summary: "Summary of goal four",
-            },
-            {
-              goal: "Goal five",
-              summary: "Summary of goal five",
-            },
-          ].map((item, index) => (
+          {items.map((item, index) => (
             <div key={index} className={styles.step}>
               <div className={styles.icon}>
-                <img src="/images/step-icon.png" alt="step" />
+                <img src={iconImg} alt="step" />
               </div>
               <div>
                 <p className={styles.goal}>Process • {item.goal}</p>
