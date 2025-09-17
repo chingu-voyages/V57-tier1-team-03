@@ -1,6 +1,8 @@
 import styles from "./Body.module.css";
 import leftImg from "../../assets/DarkChart.png";
 import iconImg from "../../assets/Content.png";
+import lastIcon from "../../assets/Relume.png";
+
 export default function BodySection() {
   const items = [
     {
@@ -50,7 +52,10 @@ export default function BodySection() {
           {items.map((item, index) => (
             <div key={index} className={styles.step}>
               <div className={styles.icon}>
-                <img src={iconImg} alt="step" />
+                <img
+                  src={index === items.length - 1 ? lastIcon : iconImg}
+                  alt="step"
+                />
               </div>
               <div>
                 <p className={styles.goal}>Process • {item.goal}</p>
