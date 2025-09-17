@@ -38,10 +38,11 @@ export default function BodySection() {
           {/* Chart Card */}
           <div className={styles.chartCard}>
             <img src={leftImg} alt="PR Chart" className={styles.chartImage} />
+            <p className={styles.subtext}>
+              Monitor your pull requests effortlessly and keep your data
+              organized
+            </p>
           </div>
-          <p className={styles.subtext}>
-            Monitor your pull requests effortlessly and keep your data organized
-          </p>
         </div>
 
         {/* Right side: Process Steps */}
