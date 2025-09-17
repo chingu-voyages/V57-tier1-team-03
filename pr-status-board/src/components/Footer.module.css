@@ -1,4 +1,8 @@
-                  
+.container {
+ background: var(--secondary-gray-blue);
+ width: 100vw;
+ padding: 3.2rem 4.1rem;
+}
 
 .footer {
  display: flex;
