@@ -1,0 +1,20 @@
+.container {
+ background: linear-gradient(166deg,rgba(15, 23, 42, 1) 50%,  rgba(70, 88, 190, 0.74) 150%);
+ width: 100vw;
+ height: 51rem;
+ padding: 3.2rem 4.1rem;
+}
+h2 {
+ text-align: center;
+ font-weight: 700;
+ font-size: 3rem;
+ padding: 1.5rem;
+}
+span {
+ color: var(--blue);
+}
+
+p {
+ color: var(--sub-text-gray);
+ text-align: center;
+}

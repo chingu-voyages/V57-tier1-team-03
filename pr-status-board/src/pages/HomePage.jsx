@@ -1,10 +1,11 @@
 import React from 'react'
+import OurTeam from '../components/OurTeam'
 
 const Home = () => {
   return (
-    <div>
-     Home
-    </div>
+    <>
+     <OurTeam />
+    </>
   )
 }
 
