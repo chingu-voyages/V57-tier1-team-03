@@ -68,13 +68,13 @@ const OurTeam = () => {
                   <h4>{teamMember.name}</h4>
                   <p>{teamMember.role}</p>
                   <div className={styles.socials}>
-                    <a href="/">
+                    <a href={teamMember.socials.linkedin}>
                       <img src="src/assets/linkedin_icon.png" alt="linkedin" />
                     </a>
-                    <a href="/">
+                    <a href={teamMember.socials.twitter}>
                       <img src="src/assets/x_icon.png" alt="twitter" />
                     </a>
-                    <a href="/">
+                    <a href={teamMember.socials.github}>
                       <img src="src/assets/github_icon.png" alt="github" />
                     </a>
                   </div>
