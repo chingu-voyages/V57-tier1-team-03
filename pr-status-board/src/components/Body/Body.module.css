@@ -75,3 +75,38 @@
   font-size: 0.95rem;
   color: var(--sub-text-gray);
 }
+/* MOBILE RESPONSIVENES */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .left,
+  .right {
+    max-width: 100%;
+  }
+
+  .chartImage {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .subtext {
+    margin-left: 0;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .step {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .textContent {
+    margin-left: 3.5rem;
+  }
+
+  .summary {
+    font-size: 1.25rem;
+  }
+}

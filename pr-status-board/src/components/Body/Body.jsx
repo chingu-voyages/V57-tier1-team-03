@@ -57,7 +57,7 @@ export default function BodySection() {
                   alt="step"
                 />
               </div>
-              <div>
+              <div className={styles.textContent}>
                 <p className={styles.goal}>Process • {item.goal}</p>
                 <h3 className={styles.summary}>{item.summary}</h3>
                 <p className={styles.description}>
