@@ -1,11 +1,11 @@
-import React from 'react'
-
-const Home = () => {
+import HeroSection from "../components/Hero/Hero.jsx";
+import BodySection from "../components/Body/Body.jsx";
+function Home() {
   return (
-    <div>
-     Home
-    </div>
-  )
+    <>
+      <HeroSection />
+      <BodySection />
+    </>
+  );
 }
-
-export default Home
+export default Home;
