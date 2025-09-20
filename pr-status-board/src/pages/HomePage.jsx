@@ -3,7 +3,7 @@ import BodySection from "../components/Body/Body.jsx";
 function Home() {
   return (
     <>
-      {/* <HeroSection /> */}
+      <HeroSection />
       <BodySection />
     </>
   );
