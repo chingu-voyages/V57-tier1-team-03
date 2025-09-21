@@ -38,51 +38,46 @@ const OurTeam = () => {
   return (
     <>
       <div className={styles.container}>
-        <div>
-          <h2>
-            Our <span>team</span>
-          </h2>
-          <p>
-            A common concern a visitor experiences is how well will the product
-            or service be <br />
-            supported. Introducing the team eases fears while showing
-            confidence.
-          </p>
-        </div>
+        <h2 className={styles.heading}>
+          Our <span>team</span>
+        </h2>
+        <p className={styles.paragraph}>
+          A common concern a visitor experiences is how well will the product or
+          service be <br />
+          supported. Introducing the team eases fears while showing confidence.
+        </p>
 
         <div className={styles.cards}>
           {ourTeam.map((teamMember) => (
-            <>
-              <div className={styles.card}>
-                {/* img  */}
-                <div className={styles.image_container}>
-                  <img
-                    className={styles.picture}
-                    src={teamMember.image}
-                    alt="developerIimage"
-                  />
-                </div>
+            <div className={styles.card}>
+              {/* img  */}
+              <div className={styles.image_container}>
+                <img
+                  className={styles.picture}
+                  src={teamMember.image}
+                  alt="developer-image"
+                />
+              </div>
 
-                {/* text  */}
-                <div className={styles.card_text}>
-                  <h4>{teamMember.name}</h4>
-                  <p>{teamMember.role}</p>
-                  <div className={styles.socials}>
-                    <a href={teamMember.socials.linkedin}>
-                      <img src="src/assets/linkedin_icon.png" alt="linkedin" />
-                    </a>
-                    <a href={teamMember.socials.twitter}>
-                      <img src="src/assets/x_icon.png" alt="twitter" />
-                    </a>
-                    <a href={teamMember.socials.github}>
-                      <img src="src/assets/github_icon.png" alt="github" />
-                    </a>
-                  </div>
+              {/* text  */}
+              <div className={styles.card_text}>
+                <h4>{teamMember.name}</h4>
+                <p>{teamMember.role}</p>
+                <div className={styles.socials}>
+                  <a href={teamMember.socials.linkedin}>
+                    <img src="src/assets/linkedin_icon.png" alt="linkedin" />
+                  </a>
+                  <a href={teamMember.socials.twitter}>
+                    <img src="src/assets/x_icon.png" alt="twitter" />
+                  </a>
+                  <a href={teamMember.socials.github}>
+                    <img src="src/assets/github_icon.png" alt="github" />
+                  </a>
                 </div>
               </div>
-            </>
+            </div>
           ))}
-        </div>
+          </div>
       </div>
     </>
   );
