@@ -12,12 +12,7 @@ const Home = () => {
      <HeroSection />
      <BodySection />
     <OurVision />
-<<<<<<< HEAD
     <OurTeam />
-=======
-     <OurTeam />
-     
->>>>>>> 07c6d65dea4f7ea052a3c56dc484e86f5ae38b25
     </>
   );
 
