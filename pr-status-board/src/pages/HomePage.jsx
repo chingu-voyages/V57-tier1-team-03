@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import HeroSection from "../components/Hero/Hero.jsx";
-import BodySection from "../components/Body/Body.jsx";
-function Home() {
-  return (
-    <>
-      <HeroSection />
-      <BodySection />
-=======
 
 import React from 'react'
 import OurTeam from '../components/Body/OurTeam.jsx'
@@ -22,7 +13,6 @@ const Home = () => {
      <ProcessSection />
     <OurVision />
     <OurTeam />
->>>>>>> feat/header-and-footer
     </>
   );
 }
