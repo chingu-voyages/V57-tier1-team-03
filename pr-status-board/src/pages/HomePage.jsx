@@ -1,11 +1,21 @@
+
+import React from 'react'
+import OurTeam from '../components/OurTeam'
+import OurVision from '../components/OurVision'
+
 import HeroSection from "../components/Hero/Hero.jsx";
 import BodySection from "../components/Body/Body.jsx";
-function Home() {
+
+const Home = () => {
   return (
     <>
-      <HeroSection />
-      <BodySection />
+     <HeroSection />
+     <BodySection />
+    <OurVision />
+     <OurTeam />
+     
     </>
   );
+
 }
 export default Home;
