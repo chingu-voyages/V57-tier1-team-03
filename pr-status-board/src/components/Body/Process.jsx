@@ -1,9 +1,9 @@
-import styles from "./Body.module.css";
+import styles from "./Process.module.css";
 import leftImg from "../../assets/DarkChart.png";
 import iconImg from "../../assets/Content.png";
 import lastIcon from "../../assets/Relume.png";
 
-export default function BodySection() {
+export default function ProcessSection() {
   const items = [
     {
       goal: "Goal one",
