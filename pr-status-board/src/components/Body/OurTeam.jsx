@@ -1,10 +1,16 @@
 import React from "react";
 import styles from "./OurTeam.module.css";
+import Dev1 from '/src/assets/Dev 1.jpeg'
+import Dev2 from '/src/assets/Dev 2.jpeg'
+import Dev3 from '/src/assets/Dev 3.png'
+import Linkedin from "/src/assets/linkedin_icon.png"
+import X from "/src/assets/x_icon.png"
+import Github from "/src/assets/github_icon.png"
 
 const OurTeam = () => {
   const ourTeam = [
     {
-      image: "src/assets/Dev 1.jpeg",
+      image: Dev1,
       name: "Tiffany Nebo",
       role: "Backend Developer",
       socials: {
@@ -14,7 +20,7 @@ const OurTeam = () => {
       },
     },
     {
-      image: "src/assets/Dev 2.jpeg",
+      image: Dev2,
       name: "Eleazer Abbey",
       role: "Frontend Developer",
       socials: {
@@ -24,7 +30,7 @@ const OurTeam = () => {
       },
     },
     {
-      image: "src/assets/Dev 3.png",
+      image: Dev3,
       name: "Nikola Kojevic",
       role: "Frontend Developer",
       socials: {
@@ -65,13 +71,16 @@ const OurTeam = () => {
                 <p>{teamMember.role}</p>
                 <div className={styles.socials}>
                   <a href={teamMember.socials.linkedin}>
-                    <img src="src/assets/linkedin_icon.png" alt="linkedin" />
+                    <img
+                      src={Linkedin}
+                      alt="linkedin"
+                    />
                   </a>
                   <a href={teamMember.socials.twitter}>
-                    <img src="src/assets/x_icon.png" alt="twitter" />
+                    <img src={X} alt="twitter" />
                   </a>
                   <a href={teamMember.socials.github}>
-                    <img src="src/assets/github_icon.png" alt="github" />
+                    <img src={Github} alt="github" />
                   </a>
                 </div>
               </div>
