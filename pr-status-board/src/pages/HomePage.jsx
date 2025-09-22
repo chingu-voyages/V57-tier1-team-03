@@ -11,8 +11,8 @@ const Home = () => {
     <>
      <HeroSection />
      <ProcessSection />
-    <OurVision />
-    <OurTeam />
+     <OurVision />
+     <OurTeam />
     </>
   );
 }
