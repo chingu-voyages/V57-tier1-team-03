@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
+import Logo from "/src/assets/logo.png";
 
 const Header = () => {
   return (
@@ -18,7 +19,7 @@ const Header = () => {
           </li>
         </ul>
         <div>
-          <img className={styles.logo} src="src/assets/logo.png" alt="logo" />
+          <img className={styles.logo} src={Logo} alt="logo" />
         </div>
       </nav>
     </div>
