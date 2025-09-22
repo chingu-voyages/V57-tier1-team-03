@@ -29,9 +29,20 @@ a:active ::after {
   height: 5rem;
 }
 
-.modal_menu {
+.mobile_nav {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
   display: none;
-  width: 450px;
+}
+
+.modal_menu {
+  position: absolute;
+  right: 0;
+  display: none;
+  width: 400px;
   height: 50vh;
   margin: auto;
   background: var(--secondary-gray-blue);
@@ -61,19 +72,34 @@ a:active ::after {
 
 /* MOBILE RESPONSIVENES */
 
-@media (max-width: 650px) {
+@media (max-width: 768px) {
   .ul {
     display: none;
   }
 
  .container {
-  padding: 0 1rem;
+  padding: 0;
 }
 
 .header {
-  width: 90%;
+  /* width: 90%; */
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+}
+
+.mobile_nav {
+  width: 450px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.icon {
+  display: flex;
+}
+
+.modal_menu {
+  display: flex;
 }
 }
