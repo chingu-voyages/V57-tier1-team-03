@@ -7,10 +7,13 @@ const OurVision = () => {
   return (
     <>
       <div className={styles.container}>
+        <h2 className={styles.heading}>
+          Our <span>vision</span>
+        </h2>
         <p className={styles.paragraph}>
           Our vision is to simplify and streamline the GitHub pull request
-          workflow, making collaboration faster, clearer,<br/> and more efficient for
-          developers and teams worldwide.
+          workflow, making collaboration faster, clearer,
+          <br /> and more efficient for developers and teams worldwide.
         </p>
 
         <div className={styles.cards}>
