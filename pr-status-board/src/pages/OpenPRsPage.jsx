@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import OpenPrTop from "../components/OpenPrTop/OpenTop";
 
 const OpenPRs = () => {
   return (
-    <div>OpenPRs</div>
-  )
-}
+    <>
+      <OpenPrTop />
+    </>
+  );
+};
 
-export default OpenPRs
+export default OpenPRs;
