@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./OpenTop.module.css";
+import SavedPRList from "../SavedPrList/SavedPrList";
 
 const OpenPrTop = () => {
   const [username, setUsername] = useState("");
@@ -7,10 +8,47 @@ const OpenPrTop = () => {
   const [selectedRepo, setSelectedRepo] = useState("");
   const [prs, setPrs] = useState([]);
   const [selectedPR, setSelectedPR] = useState(null);
+  // const [savedPRs, setSavedPRs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Fetch repos for user
+  // 🔹 Load saved PRs on mount
+  useEffect(() => {
+    const savedData = localStorage.getItem("openPRs");
+    if (savedData) {
+      const parsed = JSON.parse(savedData);
+      if (Array.isArray(parsed)) {
+        // setSavedPRs(parsed);
+      }
+    }
+  }, []);
+
+  // 🔹 Save handler
+  const handleSave = () => {
+    console.log("handleSave called", { username, selectedRepo, selectedPR });
+    if (!username || !selectedRepo || !selectedPR) {
+      alert("Nothing to save yet!");
+      return;
+    }
+
+    const existing = JSON.parse(localStorage.getItem("openPRs") || "[]");
+    const filtered = existing.filter(
+      (item) =>
+        !(
+          item.username === username &&
+          item.selectedRepo === selectedRepo &&
+          item.selectedPR.number === selectedPR.number
+        )
+    );
+
+    const updated = [...filtered, { username, selectedRepo, selectedPR }];
+    localStorage.setItem("openPRs", JSON.stringify(updated));
+    // setSavedPRs(updated);
+    console.log("Saved:", updated);
+    alert(`Saved PR #${selectedPR.number} for ${username}/${selectedRepo}`);
+  };
+
+  // 🔹 Fetch repos for user
   const fetchRepos = async () => {
     if (!username) return;
     try {
@@ -31,30 +69,27 @@ const OpenPrTop = () => {
     }
   };
 
-  // Fetch PRs for selected repo
-  useEffect(() => {
-    if (!selectedRepo) return;
-    const fetchPRs = async () => {
-      try {
-        setLoading(true);
-        setError("");
-        setPrs([]);
-        setSelectedPR(null);
+  // 🔹 Fetch PRs for selected repo
+  const fetchPRs = async (repoName) => {
+    if (!repoName || !username) return;
+    try {
+      setLoading(true);
+      setError("");
+      setPrs([]);
+      setSelectedPR(null);
 
-        const res = await fetch(
-          `https://api.github.com/repos/${username}/${selectedRepo}/pulls?state=open`
-        );
-        if (!res.ok) throw new Error("Failed to fetch PRs");
-        const data = await res.json();
-        setPrs(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPRs();
-  }, [selectedRepo, username]);
+      const res = await fetch(
+        `https://api.github.com/repos/${username}/${repoName}/pulls?state=open`
+      );
+      if (!res.ok) throw new Error("Failed to fetch PRs");
+      const data = await res.json();
+      setPrs(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -69,7 +104,7 @@ const OpenPrTop = () => {
         />
         <div className={styles.PRbuttons}>
           <button onClick={fetchRepos} className={styles.fetchBtn}>
-            Fetch PRs
+            Fetch Repos
           </button>
         </div>
       </div>
@@ -83,7 +118,11 @@ const OpenPrTop = () => {
           <label>Select Repository</label>
           <select
             value={selectedRepo}
-            onChange={(e) => setSelectedRepo(e.target.value)}
+            onChange={(e) => {
+              const repoName = e.target.value;
+              setSelectedRepo(repoName);
+              if (repoName) fetchPRs(repoName);
+            }}
             className={styles.dropdown}
           >
             <option value="">-- Select Repo --</option>
@@ -102,11 +141,14 @@ const OpenPrTop = () => {
           <label>Select PR</label>
           <select
             value={selectedPR ? selectedPR.number : ""}
-            onChange={(e) =>
+            onChange={(e) => {
+              const prNumber = parseInt(e.target.value);
               setSelectedPR(
-                prs.find((pr) => pr.number === parseInt(e.target.value))
-              )
-            }
+                isNaN(prNumber)
+                  ? null
+                  : prs.find((pr) => pr.number === prNumber)
+              );
+            }}
             className={styles.dropdown}
           >
             <option value="">-- Select PR --</option>
@@ -120,6 +162,15 @@ const OpenPrTop = () => {
       )}
       {prs.length === 0 && selectedRepo && !loading && (
         <p>No open PRs found for this repository.</p>
+      )}
+
+      {/* Save Button */}
+      {selectedPR && (
+        <div className={styles.saveBox}>
+          <button onClick={handleSave} className={styles.saveBtn}>
+            Save This PR
+          </button>
+        </div>
       )}
 
       {/* PR Details Card */}
@@ -162,7 +213,7 @@ const OpenPrTop = () => {
           </div>
         </div>
       )}
-
+      <SavedPRList />
       {/* Status graph placeholder */}
       <div className={styles.statusGraph}>
         <h3>See how we track pull requests</h3>
