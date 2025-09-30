@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./OpenTop.module.css";
 import SavedPRList from "../SavedPrList/SavedPrList";
+import PRStatusGraph from "../PrStatusGraph/PrStatusGraph";
 
 const OpenPrTop = () => {
   const [username, setUsername] = useState("");
@@ -213,12 +214,11 @@ const OpenPrTop = () => {
           </div>
         </div>
       )}
-      <SavedPRList />
-      {/* Status graph placeholder */}
+      {/* Status graph   */}
       <div className={styles.statusGraph}>
-        <h3>See how we track pull requests</h3>
-        <p>[Status graph goes here]</p>
+        <PRStatusGraph />
       </div>
+      <SavedPRList />
     </div>
   );
 };
