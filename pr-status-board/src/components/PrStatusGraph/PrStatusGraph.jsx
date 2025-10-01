@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import "./PrStatusGraph.css";
+
 const PRStatusGraph = () => {
   const [data, setData] = useState([]);
 
@@ -10,9 +11,8 @@ const PRStatusGraph = () => {
     const counts = {};
 
     savedData.forEach((entry) => {
-      const date = new Date(entry.selectedPR.created_at)
-        .toISOString()
-        .split("T")[0];
+      // ✅ use `entry.date` (the saved field) instead of entry.selectedPR.created_at
+      const date = new Date(entry.date).toISOString().split("T")[0];
       counts[date] = (counts[date] || 0) + 1;
     });
 

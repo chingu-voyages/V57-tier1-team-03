@@ -25,17 +25,26 @@ const SavedPRList = () => {
       <div className={styles.listContainer}>
         {savedPRs.map((entry) => (
           <div
-            key={`${entry.username}-${entry.selectedRepo}-${entry.selectedPR.number}`}
+            key={`${entry.username}-${entry.repo}-${entry.number}`}
             className={styles.prItem}
           >
             <p>
-              <strong>@{entry.username}</strong> / {entry.selectedRepo}
+              <strong>@{entry.username}</strong> / {entry.repo}
             </p>
             <p>
-              #{entry.selectedPR.number} {entry.selectedPR.title}
+              #{entry.number} {entry.title}
+            </p>
+            <p>
+              <strong>Author:</strong> @{entry.author}
+            </p>
+            <p>
+              <strong>Created:</strong> {entry.date}
+            </p>
+            <p>
+              <strong>Last Action:</strong> {entry.action}
             </p>
             <a
-              href={entry.selectedPR.html_url}
+              href={entry.url}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.openLink}

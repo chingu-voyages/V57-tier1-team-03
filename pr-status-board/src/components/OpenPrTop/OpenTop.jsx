@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./OpenTop.module.css";
-import SavedPRList from "../SavedPrList/SavedPrList";
+
 import PRStatusGraph from "../PrStatusGraph/PrStatusGraph";
 
 const OpenPrTop = () => {
@@ -9,20 +9,8 @@ const OpenPrTop = () => {
   const [selectedRepo, setSelectedRepo] = useState("");
   const [prs, setPrs] = useState([]);
   const [selectedPR, setSelectedPR] = useState(null);
-  // const [savedPRs, setSavedPRs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
-  // 🔹 Load saved PRs on mount
-  useEffect(() => {
-    const savedData = localStorage.getItem("openPRs");
-    if (savedData) {
-      const parsed = JSON.parse(savedData);
-      if (Array.isArray(parsed)) {
-        // setSavedPRs(parsed);
-      }
-    }
-  }, []);
 
   // 🔹 Save handler
   const handleSave = () => {
@@ -32,19 +20,37 @@ const OpenPrTop = () => {
       return;
     }
 
+    // Prepare the PR data with required fields
+    const prData = {
+      date: new Date(selectedPR.created_at).toDateString(), // Created date
+      title: selectedPR.title, // PR title
+      author: selectedPR.user.login, // PR author
+      action: selectedPR.updated_at
+        ? new Date(selectedPR.updated_at).toDateString()
+        : "N/A", // Last updated
+      progress: "Not started", //  Placeholder, set how you like
+      rating: null, //  Placeholder, maybe user-defined later
+      url: selectedPR.html_url,
+      number: selectedPR.number,
+      repo: selectedRepo,
+      username,
+    };
+
     const existing = JSON.parse(localStorage.getItem("openPRs") || "[]");
+
+    // Remove duplicates (same user + repo + PR number)
     const filtered = existing.filter(
       (item) =>
         !(
           item.username === username &&
-          item.selectedRepo === selectedRepo &&
-          item.selectedPR.number === selectedPR.number
+          item.repo === selectedRepo &&
+          item.number === selectedPR.number
         )
     );
 
-    const updated = [...filtered, { username, selectedRepo, selectedPR }];
+    const updated = [...filtered, prData];
     localStorage.setItem("openPRs", JSON.stringify(updated));
-    // setSavedPRs(updated);
+
     console.log("Saved:", updated);
     alert(`Saved PR #${selectedPR.number} for ${username}/${selectedRepo}`);
   };
@@ -218,7 +224,6 @@ const OpenPrTop = () => {
       <div className={styles.statusGraph}>
         <PRStatusGraph />
       </div>
-      <SavedPRList />
     </div>
   );
 };
