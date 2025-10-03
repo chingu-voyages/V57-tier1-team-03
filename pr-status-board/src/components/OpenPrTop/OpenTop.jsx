@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styles from "./OpenTop.module.css";
-
 import PRStatusGraph from "../PrStatusGraph/PrStatusGraph";
-
+import logo from "../../assets/logo.png";
 const OpenPrTop = () => {
   const [username, setUsername] = useState("");
   const [repos, setRepos] = useState([]);
@@ -20,16 +19,15 @@ const OpenPrTop = () => {
       return;
     }
 
-    // Prepare the PR data with required fields
     const prData = {
-      date: new Date(selectedPR.created_at).toDateString(), // Created date
-      title: selectedPR.title, // PR title
-      author: selectedPR.user.login, // PR author
+      date: new Date(selectedPR.created_at).toDateString(),
+      title: selectedPR.title,
+      author: selectedPR.user.login,
       action: selectedPR.updated_at
         ? new Date(selectedPR.updated_at).toDateString()
-        : "N/A", // Last updated
-      progress: "Not started", //  Placeholder, set how you like
-      rating: null, //  Placeholder, maybe user-defined later
+        : "N/A",
+      progress: "Not started",
+      rating: null,
       url: selectedPR.html_url,
       number: selectedPR.number,
       repo: selectedRepo,
@@ -37,8 +35,6 @@ const OpenPrTop = () => {
     };
 
     const existing = JSON.parse(localStorage.getItem("openPRs") || "[]");
-
-    // Remove duplicates (same user + repo + PR number)
     const filtered = existing.filter(
       (item) =>
         !(
@@ -47,15 +43,12 @@ const OpenPrTop = () => {
           item.number === selectedPR.number
         )
     );
-
     const updated = [...filtered, prData];
     localStorage.setItem("openPRs", JSON.stringify(updated));
-
     console.log("Saved:", updated);
     alert(`Saved PR #${selectedPR.number} for ${username}/${selectedRepo}`);
   };
 
-  // 🔹 Fetch repos for user
   const fetchRepos = async () => {
     if (!username) return;
     try {
@@ -64,7 +57,6 @@ const OpenPrTop = () => {
       setRepos([]);
       setPrs([]);
       setSelectedPR(null);
-
       const res = await fetch(`https://api.github.com/users/${username}/repos`);
       if (!res.ok) throw new Error("Failed to fetch repos");
       const data = await res.json();
@@ -76,7 +68,6 @@ const OpenPrTop = () => {
     }
   };
 
-  // 🔹 Fetch PRs for selected repo
   const fetchPRs = async (repoName) => {
     if (!repoName || !username) return;
     try {
@@ -84,7 +75,6 @@ const OpenPrTop = () => {
       setError("");
       setPrs([]);
       setSelectedPR(null);
-
       const res = await fetch(
         `https://api.github.com/repos/${username}/${repoName}/pulls?state=open`
       );
@@ -100,129 +90,130 @@ const OpenPrTop = () => {
 
   return (
     <div className={styles.container}>
-      {/* Top bar: username + fetch button */}
-      <div className={styles.topBar}>
-        <input
-          type="text"
-          placeholder="GitHub username..."
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className={styles.input}
-        />
-        <div className={styles.PRbuttons}>
-          <button onClick={fetchRepos} className={styles.fetchBtn}>
-            Fetch Repos
-          </button>
+      {/* 🔹 Top Section */}
+      <div className={styles.topSection}>
+        {/* Left: Repo + PR Selection */}
+        <div className={styles.repoPrBox}>
+          {repos.length > 0 && (
+            <div className={styles.dropdownBox}>
+              <label className={styles.label}>Select Repository</label>
+              <select
+                value={selectedRepo}
+                onChange={(e) => {
+                  const repoName = e.target.value;
+                  setSelectedRepo(repoName);
+                  if (repoName) fetchPRs(repoName);
+                }}
+                className={styles.dropdown}
+              >
+                <option value="">-- Select Repo --</option>
+                {repos.map((repo) => (
+                  <option key={repo.id} value={repo.name}>
+                    {repo.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {prs.length > 0 && (
+            <div className={styles.dropdownBox}>
+              <label className={styles.label}>Select PR</label>
+              <select
+                value={selectedPR ? selectedPR.number : ""}
+                onChange={(e) => {
+                  const prNumber = parseInt(e.target.value);
+                  setSelectedPR(
+                    isNaN(prNumber)
+                      ? null
+                      : prs.find((pr) => pr.number === prNumber)
+                  );
+                }}
+                className={styles.dropdown}
+              >
+                <option value="">-- Select PR --</option>
+                {prs.map((pr) => (
+                  <option key={pr.id} value={pr.number}>
+                    #{pr.number} {pr.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
+
+        {/* Right: Username + Fetch + Save + Logo */}
+        <div className={styles.userBox}>
+          <input
+            type="text"
+            placeholder="GitHub username..."
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className={styles.input}
+          />
+          <div className={styles.actions}>
+            <button onClick={fetchRepos} className={styles.fetchBtn}>
+              Fetch PR’s
+            </button>
+            {selectedPR && (
+              <button onClick={handleSave} className={styles.saveBtn}>
+                Save
+              </button>
+            )}
+          </div>
+          <div className={styles.logoPlaceholder}>
+            <img src={logo} alt="Logo" />
+          </div>
         </div>
       </div>
 
-      {loading && <p>Loading...</p>}
-      {error && <p className={styles.error}>{error}</p>}
-
-      {/* Repo Dropdown */}
-      {repos.length > 0 && (
-        <div className={styles.dropdownBox}>
-          <label>Select Repository</label>
-          <select
-            value={selectedRepo}
-            onChange={(e) => {
-              const repoName = e.target.value;
-              setSelectedRepo(repoName);
-              if (repoName) fetchPRs(repoName);
-            }}
-            className={styles.dropdown}
-          >
-            <option value="">-- Select Repo --</option>
-            {repos.map((repo) => (
-              <option key={repo.id} value={repo.name}>
-                {repo.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-
-      {/* PRs Dropdown */}
-      {prs.length > 0 && (
-        <div className={styles.dropdownBox}>
-          <label>Select PR</label>
-          <select
-            value={selectedPR ? selectedPR.number : ""}
-            onChange={(e) => {
-              const prNumber = parseInt(e.target.value);
-              setSelectedPR(
-                isNaN(prNumber)
-                  ? null
-                  : prs.find((pr) => pr.number === prNumber)
-              );
-            }}
-            className={styles.dropdown}
-          >
-            <option value="">-- Select PR --</option>
-            {prs.map((pr) => (
-              <option key={pr.id} value={pr.number}>
-                #{pr.number} {pr.title}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-      {prs.length === 0 && selectedRepo && !loading && (
-        <p>No open PRs found for this repository.</p>
-      )}
-
-      {/* Save Button */}
-      {selectedPR && (
-        <div className={styles.saveBox}>
-          <button onClick={handleSave} className={styles.saveBtn}>
-            Save This PR
-          </button>
-        </div>
-      )}
-
-      {/* PR Details Card */}
-      {selectedPR && (
-        <div className={styles.detailsCard}>
-          <h3>PR number: #{selectedPR.number}</h3>
-          <p>
-            <strong>Title:</strong> {selectedPR.title}
-          </p>
-          <p>
-            <strong>Author:</strong> @{selectedPR.user.login}
-          </p>
-          <p>
-            <strong>Created:</strong>{" "}
-            {new Date(selectedPR.created_at).toDateString()}
-          </p>
-          <p>
-            <strong>Reviewers:</strong>{" "}
-            {selectedPR.requested_reviewers.length > 0
-              ? selectedPR.requested_reviewers
-                  .map((r) => `@${r.login}`)
-                  .join(", ")
-              : "None"}
-          </p>
-          <p>
-            <strong>Last Action:</strong>{" "}
-            {selectedPR.updated_at
-              ? new Date(selectedPR.updated_at).toDateString()
-              : "N/A"}
-          </p>
-          <div className={styles.buttons}>
-            <a
-              href={selectedPR.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.openBtn}
-            >
-              Open in GitHub
-            </a>
+      {/* 🔹 Bottom Section */}
+      <div className={styles.bottomSection}>
+        {/* Left: PR Details */}
+        {selectedPR && (
+          <div className={styles.detailsCard}>
+            <h3 className={styles.prTitle}>PR number: #{selectedPR.number}</h3>
+            <p className={styles.detail}>
+              <strong>Title:</strong> {selectedPR.title}
+            </p>
+            <p className={styles.detail}>
+              <strong>Author:</strong> @{selectedPR.user.login}
+            </p>
+            <p className={styles.detail}>
+              <strong>Created:</strong>{" "}
+              {new Date(selectedPR.created_at).toDateString()}
+            </p>
+            <p className={styles.detail}>
+              <strong>Reviewers:</strong>
+              {selectedPR.requested_reviewers.length > 0
+                ? selectedPR.requested_reviewers
+                    .map((r) => `@${r.login}`)
+                    .join(", ")
+                : "None"}
+            </p>
+            <p className={styles.detail}>
+              <strong>Last Action:</strong>
+              {selectedPR.updated_at
+                ? new Date(selectedPR.updated_at).toDateString()
+                : "N/A"}
+            </p>
+            <div className={styles.buttons}>
+              <a
+                href={selectedPR.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.openBtn}
+              >
+                Open in GitHub
+              </a>
+            </div>
           </div>
+        )}
+
+        {/* Right: PR Status Graph */}
+        <div className={styles.statusGraph}>
+          <PRStatusGraph />
         </div>
-      )}
-      {/* Status graph   */}
-      <div className={styles.statusGraph}>
-        <PRStatusGraph />
       </div>
     </div>
   );
