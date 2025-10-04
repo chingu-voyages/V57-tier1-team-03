@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import OpenPrTop from "../components/OpenPrTop/OpenTop";
+import SavedPRList from "../components/SavedPrList/SavedPrList";
 
 const OpenPRs = () => {
   return (
-    <div>OpenPRs</div>
-  )
-}
+    <>
+      <OpenPrTop />
+      <SavedPRList />
+    </>
+  );
+};
 
-export default OpenPRs
+export default OpenPRs;

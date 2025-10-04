@@ -1,0 +1,59 @@
+.container {
+  padding: 20px;
+  background-color: var(--primary-dark-blue);
+  color: var(--main-text-white);
+  font-family: var(--font-text);
+}
+
+/* Top: repo+pr on left, username+buttons+logo on right */
+.topSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.repoPrBox {
+  background: var(--secondary-gray-blue);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.userBox {
+  background: var(--secondary-gray-blue);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.logoPlaceholder {
+  margin-top: auto;
+  align-self: center;
+}
+
+/* Bottom: PR details left, graph right */
+.bottomSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.detailsCard {
+  background-color: var(--secondary-gray-blue);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.statusGraph {
+  background-color: var(--secondary-gray-blue);
+  padding: 20px;
+  border-radius: 8px;
+}
