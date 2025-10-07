@@ -19,7 +19,9 @@ const Header = () => {
               <NavLink to="/closed-prs">Closed PRs</NavLink>
             </li>
           </ul>
-            <img className={styles.logo} src={Logo} alt="logo" />
+            <div className={styles.logoWrapper}>
+    <img className={styles.logo} src={Logo} alt="logo" />
+  </div>
         </nav>
       </div>
     </>

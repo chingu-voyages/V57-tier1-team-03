@@ -1,0 +1,600 @@
+:root {
+  /* Panel & layout colors */
+  --panel: #13213e;
+  --panel-2: #0f1c36;
+  --panel-3: #0b162c;
+  --line: #274061;
+
+  /* Text colors */
+  --text: #eaf1ff;
+  --text-dim: #9fb5d5;
+
+  /* Button gradients */
+  --btn-blue-1: #1e4fb4;
+  --btn-blue-2: #153c8f;
+  --btn-green-1: #00ad64;
+  --btn-green-2: #008a51;
+
+  /* Spacing & radius */
+  --r-lg: 18px;
+  --gap-2: 16px;
+  --gap-3: 22px;
+  --gap-4: 30px;
+  --h: 48px;
+}
+
+/* -----------------------------------
+   PAGE CONTAINER
+----------------------------------- */
+.container {
+  padding: 28px;
+  color: var(--text);
+  font-family: var(--font-text, Inter, sans-serif);
+}
+
+/* -----------------------------------
+   TOP SECTION (two main cards)
+----------------------------------- */
+.topSection {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--gap-4);
+  margin-bottom: 36px;
+}
+
+/* Shared card styles */
+.repoPrBox,
+.userBox {
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 18px;
+}
+
+/* -----------------------------------
+   LEFT SIDE (Repository + PR dropdowns)
+----------------------------------- */
+.repoPrBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two dropdowns side by side */
+  gap: var(--gap-3);
+}
+
+.dropdownBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.dropdown {
+  width: 100%;
+  height: var(--h);
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #0c1934, #0f1e3b);
+  color: var(--text);
+  padding: 0 12px;
+  outline: none;
+}
+
+/* Hover & focus styles for enabled selects */
+.dropdown:not(:disabled):hover {
+  border-color: #2a4770;
+}
+
+.dropdown:not(:disabled):focus {
+  box-shadow: 0 0 0 3px rgba(82, 227, 255, 0.22);
+}
+
+/* Small info text under each dropdown */
+.hint {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* Disabled state for dropdowns */
+.disabled,
+.dropdown:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.1);
+}
+
+/* -----------------------------------
+   RIGHT SIDE (Username input, buttons, logo)
+----------------------------------- */
+.userBox {
+  display: grid;
+  grid-template-rows: auto auto auto; /* input | buttons | logo */
+  grid-template-columns: 1fr;
+  gap: var(--gap-2);
+}
+
+/* Username input */
+.input {
+  height: var(--h);
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #0c1934, #0f1e3b);
+  color: var(--text);
+  padding: 0 12px;
+}
+
+/* Buttons container */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Fetch | Save */
+  gap: var(--gap-2);
+}
+
+/* Shared button styles */
+.fetchBtn,
+.saveBtn {
+  height: var(--h);
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.06s ease, filter 0.2s ease;
+}
+
+/* Fetch = blue */
+.fetchBtn {
+  background: linear-gradient(180deg, var(--btn-blue-1), var(--btn-blue-2));
+  color: #eaf1ff;
+}
+
+/* Save = green */
+.saveBtn {
+  background: linear-gradient(180deg, var(--btn-green-1), var(--btn-green-2));
+  color: #ecfff7;
+}
+
+/* Disabled Save button */
+.isDisabled,
+.saveBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+}
+
+/* Logo block below buttons */
+.logoPlaceholder {
+  justify-self: center;
+  width: 140px;
+  height: 110px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--panel-3), var(--panel-2));
+  display: grid;
+  place-items: center;
+}
+
+.logoPlaceholder img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}
+
+/* -----------------------------------
+   BOTTOM SECTION (PR details + Graph)
+----------------------------------- */
+.bottomSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-4);
+}
+
+/* Card layout for details and graph */
+.detailsCard,
+.statusGraph {
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px;
+}
+
+/* PR details content */
+.prTitle {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.detail {
+  margin: 8px 0;
+  color: var(--text-dim);
+}
+
+.buttons {
+  margin-top: 18px;
+  display: flex;
+  gap: var(--gap-2);
+}
+
+/* "Open in GitHub" button */
+.openBtn {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #1c2f66, #162754);
+  color: #e9f1ff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -----------------------------------
+   RESPONSIVE LAYOUT
+----------------------------------- */
+
+/* Stack right column under left */
+@media (max-width: 1100px) {
+  .topSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stack bottom section vertically */
+@media (max-width: 900px) {
+  .bottomSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stack dropdowns vertically on narrow screens */
+@media (max-width: 800px) {
+  .repoPrBox {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stack action buttons vertically on very small screens */
+@media (max-width: 560px) {
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------- PR Graph Section ------------------- */
+.graphSection {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  background-color: #2b2b2b;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  align-items: flex-start;
+  flex-wrap: wrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.graphSection:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.6);
+}
+
+/* Left: Info Box */
+.infoBox {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.infoTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #6b8e23;
+  margin-bottom: 0.5rem;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+.infoLabel {
+  color: #aaa;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.infoValue {
+  color: #f1f1f1;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.status {
+  color: #6b8e23;
+}
+
+/* Right: Graph Box */
+.graphBox {
+  flex: 1 1 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.graphTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #a0a0a0;
+  margin-bottom: 1rem;
+}
+
+.graphContainer {
+  width: 100%;
+  height: 250px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .graphSection {
+    flex-direction: column;
+  }
+  .graphBox {
+    align-items: flex-start;
+  }
+}
+
+/* ---- Bottom section grid ostaje: 1fr 1fr ---- */
+.bottomSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/* ---------- LEFT (details) ---------- */
+.detailsCard {
+  background-color: #2b2b2b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45);
+}
+
+.detailsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.prTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #dfe5d2;
+}
+
+.prStatusPill {
+  background: #6b8e23;
+  color: #101010;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.4px;
+}
+
+.detailRow {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #3b3b3b;
+}
+
+.detailRow:last-of-type {
+  border-bottom: none;
+}
+
+.detailLabel {
+  color: #9aa09a;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.detailValue {
+  color: #e9e9e9;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.buttons {
+  margin-top: 16px;
+}
+
+.openBtn {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #6b8e23;
+  color: #111;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.openBtn:hover {
+  background-color: #5d7b1f;
+  transform: translateY(-1px);
+}
+
+.cardButtons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.openBtn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.openBtn:hover {
+  background-color: #2563eb;
+}
+
+.closeBtn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  background-color: #dc2626;
+}
+
+/* ---------- RIGHT (graph card) ---------- */
+.graphCard {
+  background-color: #2b2b2b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 320px;
+}
+
+.graphHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.graphTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.pull {
+  color: #3b82f6; /* Blue */
+}
+
+.request {
+  color: #00d766; /* Green */
+}
+
+.buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.openBtn {
+  padding: 8px 14px;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.saveBtn {
+  padding: 8px 14px;
+  background-color: #00d766;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.isDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.graphTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #cfd7c6;
+}
+
+.graphLegend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #6b8e23;
+}
+
+.legendText {
+  color: #a8aea8;
+  font-size: 0.85rem;
+}
+
+.graphBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.graphSurface {
+  background: #1f1f1f;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 220px;
+  /* kalendar/heatmap će popuniti površinu */
+}
+
+.graphFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #9aa09a;
+}
+
+.footnote {
+  font-size: 0.85rem;
+}
+
+.rangeHint {
+  font-size: 0.85rem;
+  color: #b9c3ad;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .bottomSection {
+    grid-template-columns: 1fr;
+  }
+}

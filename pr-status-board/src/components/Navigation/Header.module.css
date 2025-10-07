@@ -1,15 +1,29 @@
 .container {
-  /* width: 99vw; */
   padding: 0 4.1rem;
   border-bottom: 1px solid;
 }
 
 .header {
-  width: 78%;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 10px auto;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 20rem;
+  padding: 1.5rem 0;
+}
+
+.logoWrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.logo {
+  width: 12rem;
+  height: auto;
+  object-fit: contain;
 }
 
 .ul {
@@ -17,44 +31,56 @@
   align-items: center;
   gap: 2rem;
   font-weight: 500;
+  z-index: 2;
 }
 
-a:active ::after {
-  color: var(--red);
-  border-bottom: 1px solid var(--red);
+.ul a {
+  color: var(--main-text-white);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
-.logo {
-  width: 10rem;
-  height: 5rem;
+.ul a:hover {
+  color: var(--green);
 }
 
-/* RESPONSIVENES */
+.ul a::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 2px;
+  background: var(--green);
+  transition: width 0.3s ease;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
 
+.ul a:hover::after {
+  width: 100%;
+}
+
+/* Responsiveness */
 @media screen and (max-width: 768px) {
-  .ul {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: small;
-  }
-
-  .container {
-    width: 97vw;
-    margin: 0;
-    padding: 0 1rem;
-  }
-
   .header {
-    width: 99%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .logoWrapper {
+    position: relative;
+    left: auto;
+    transform: none;
   }
 
   .logo {
-  width: 7rem;
-  height: 4rem;
-}
+    width: 8rem;
+  }
+
+  .ul {
+    gap: 1rem;
+    font-size: small;
+  }
 }
