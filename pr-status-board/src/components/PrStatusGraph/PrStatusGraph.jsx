@@ -27,7 +27,7 @@ const PRStatusGraph = () => {
 
   return (
     <div>
-      <h3>See how we track pull requests</h3>
+      
       <CalendarHeatmap
         startDate={new Date("2025-01-01")}
         endDate={new Date("2025-12-31")}

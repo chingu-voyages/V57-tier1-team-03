@@ -1,37 +1,71 @@
 .container {
- background: var(--secondary-gray-blue);
- /* width: 100vw; */
- padding: 3.2rem 4.1rem;
+  background-color: #3a0100;
+  padding: 1.2rem 2rem;
+  color: var(--main-text-white);
+  font-family: var(--font-text);
 }
 
 .footer {
- max-width: 1300px;
- margin: 0 auto;
- display: flex;
- align-items: center;
- justify-content: space-between;
- border-bottom: 1px solid;
- padding-bottom: 3rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--main-text-white);
+  padding-bottom: 0.8rem;
+  gap: 1rem;
 }
 
 .logo {
-  width: 10rem;
-  height: 5rem;
+  width: 11rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.chatbot_bg {
+  background: var(--primary-dark-blue);
+  border-radius: 50%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chatbot {
- width: 5rem;
- height: 5rem;
- margin: 1.5rem;
-}
-.chatbot_bg {
- background: var(--primary-dark-blue);
- border-radius: 8rem;
+  width: 3.6rem;
+  height: 3.6rem;
 }
 
 .copy {
- display: flex;
- align-items: center;
- justify-content: center;
- padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+
+  .logo {
+    width: 9rem;
+  }
+
+  .chatbot {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  .copy {
+    font-size: 0.85rem;
+  }
 }
