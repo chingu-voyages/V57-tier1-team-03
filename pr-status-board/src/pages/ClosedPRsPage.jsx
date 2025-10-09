@@ -6,7 +6,6 @@ const ClosedPRs = () => {
   return (
     <>
       <ClosedPrTop />
-      <SavedPRList />
     </>
   );
 };

@@ -1,59 +1,281 @@
-.container {
-  padding: 20px;
-  background-color: var(--primary-dark-blue);
-  color: var(--main-text-white);
-  font-family: var(--font-text);
+:root {
+  --panel: #22141a;
+  --panel-2: #1a0f14;
+  --panel-3: #130b0f;
+  --line: #4d2d36;
+
+  /* Text colors */
+  --text: #f8e9ec;
+  --text-dim: #cba9b1;
+
+  /* Button gradients */
+  --btn-red-1: #ef4444;
+  --btn-red-2: #b91c1c;
+  --btn-blue-1: #1e40af;
+  --btn-blue-2: #1e3a8a;
+
+  /* Spacing & radius */
+  --r-lg: 18px;
+  --gap-2: 16px;
+  --gap-3: 22px;
+  --gap-4: 30px;
+  --h: 48px;
 }
 
-/* Top: repo+pr on left, username+buttons+logo on right */
+/* -----------------------------------
+   PAGE CONTAINER
+----------------------------------- */
+.container {
+  padding: 28px;
+  color: var(--text);
+  font-family: var(--font-text, Inter, sans-serif);
+}
+
+/* -----------------------------------
+   TOP SECTION (two main cards)
+----------------------------------- */
 .topSection {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  margin-bottom: 30px;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--gap-4);
+  margin-bottom: 36px;
 }
 
-.repoPrBox {
-  background: var(--secondary-gray-blue);
-  padding: 20px;
-  border-radius: 8px;
-}
-
+.repoPrBox,
 .userBox {
-  background: var(--secondary-gray-blue);
-  padding: 20px;
-  border-radius: 8px;
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 18px;
+}
+
+/* -----------------------------------
+   LEFT SIDE (Repository + PR dropdowns)
+----------------------------------- */
+.repoPrBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-3);
+}
+
+.dropdownBox {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  align-items: flex-start;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.dropdown {
+  width: 100%;
+  height: var(--h);
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #1a0d10, #240e13);
+  color: var(--text);
+  padding: 0 12px;
+  outline: none;
+}
+
+.dropdown:not(:disabled):hover {
+  border-color: #732b38;
+}
+
+.dropdown:not(:disabled):focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25);
+}
+
+.disabled,
+.dropdown:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.1);
+}
+
+/* -----------------------------------
+   RIGHT SIDE (Username input, buttons, logo)
+----------------------------------- */
+.userBox {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr;
+  gap: var(--gap-2);
+}
+
+.input {
+  height: var(--h);
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #1a0d10, #240e13);
+  color: var(--text);
+  padding: 0 12px;
 }
 
 .actions {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-2);
 }
 
+/* Fetch (blue) + Save (red) */
+.fetchBtn,
+.saveBtn {
+  height: var(--h);
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.06s ease, filter 0.2s ease;
+}
+
+.fetchBtn {
+  background: linear-gradient(180deg, var(--btn-blue-1), var(--btn-blue-2));
+  color: #eaf1ff;
+}
+
+.saveBtn {
+  background: linear-gradient(180deg, var(--btn-red-1), var(--btn-red-2));
+  color: #fff4f4;
+}
+
+.isDisabled,
+.saveBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+}
+
+/* Logo */
 .logoPlaceholder {
-  margin-top: auto;
-  align-self: center;
+  justify-self: center;
+  width: 140px;
+  height: 110px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--panel-3), var(--panel-2));
+  display: grid;
+  place-items: center;
 }
 
-/* Bottom: PR details left, graph right */
+.logoPlaceholder img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+}
+
+/* -----------------------------------
+   BOTTOM SECTION (PR details + Graph)
+----------------------------------- */
 .bottomSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: var(--gap-4);
 }
 
-.detailsCard {
-  background-color: var(--secondary-gray-blue);
-  padding: 20px;
-  border-radius: 8px;
-}
-
+.detailsCard,
 .statusGraph {
-  background-color: var(--secondary-gray-blue);
-  padding: 20px;
-  border-radius: 8px;
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 22px;
+}
+
+/* Card details */
+.prTitle {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #ff9c9c;
+}
+
+.detail {
+  margin: 8px 0;
+  color: var(--text-dim);
+}
+
+.cardButtons {
+  margin-top: 18px;
+  display: flex;
+  gap: var(--gap-2);
+}
+
+.openBtn {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #3b82f6, #1e40af);
+  color: white;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.openBtn:hover {
+  background: #2563eb;
+}
+
+.closeBtn {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ef4444, #b91c1c);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+  filter: brightness(1.15);
+}
+
+/* Graph Title */
+.graphTitle {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #f0dada;
+}
+
+.pull {
+  color: #3b82f6;
+}
+
+.request {
+  color: #ef4444;
+}
+
+/* -----------------------------------
+   RESPONSIVE
+----------------------------------- */
+@media (max-width: 1100px) {
+  .topSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .bottomSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .repoPrBox {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .actions {
+    grid-template-columns: 1fr;
+  }
 }

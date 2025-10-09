@@ -1,15 +1,30 @@
 .container {
- /* width: 100vw; */
- padding: 0 4.1rem;
- border-bottom: 1px solid;
+  padding: 0 4.1rem;
+  border-bottom: 1px solid;
+  background-color: #3a0100;
 }
 
 .header {
- width: 1280px;
- margin: 0 auto;
- display: flex;
- align-items: center;
- gap: 20rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.8rem 0;
+}
+
+.logoWrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.logo {
+  width: 12rem;
+  height: auto;
+  object-fit: contain;
 }
 
 .ul {
@@ -17,89 +32,56 @@
   align-items: center;
   gap: 2rem;
   font-weight: 500;
+  z-index: 2;
 }
 
-a:active ::after {
-  color: var(--red);
-  border-bottom: 1px solid var(--red);
+.ul a {
+  color: var(--main-text-white);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
-.logo {
-  width: 10rem;
-  height: 5rem;
+.ul a:hover {
+  color: var(--green);
 }
 
-.mobile_nav {
-  align-items: center;
-  justify-content: space-between;
-}
-
-.icon {
-  display: none;
-}
-
-.modal_menu {
+.ul a::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 2px;
+  background: var(--green);
+  transition: width 0.3s ease;
   position: absolute;
-  right: 0;
-  display: none;
-  width: 400px;
-  height: 50vh;
-  margin: auto;
-  background: var(--secondary-gray-blue);
-  /* display: flex; */
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  animation: slide-in 1s;
-  transition: all ease-in;
+  bottom: -4px;
+  left: 0;
 }
 
-@keyframes slide-in {
-  0% {
-    opacity: 0;
-    translate: 150vw;
-  }
-  50% {
-    opacity: 0;
-    translate: 150vw;
-  }
-  
-  100% {
-    translate: 0 0;
-  }
+.ul a:hover::after {
+  width: 100%;
 }
 
-/* MOBILE RESPONSIVENES */
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
 
-@media (max-width: 768px) {
+  .logoWrapper {
+    position: relative;
+    left: auto;
+    transform: none;
+  }
+
+  .logo {
+    width: 8rem;
+  }
+
   .ul {
-    display: none;
+    gap: 1rem;
+    font-size: small;
   }
-
- .container {
-  padding: 0;
-}
-
-.header {
-  /* width: 90%; */
-  display: flex;
-  align-items: center;
-  /* justify-content: space-around; */
-}
-
-.mobile_nav {
-  width: 450px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.icon {
-  display: flex;
-}
-
-.modal_menu {
-  display: flex;
-}
 }

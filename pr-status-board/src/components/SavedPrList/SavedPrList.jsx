@@ -4,9 +4,8 @@ import styles from "./SavedPrList.module.css";
 const SavedPRList = () => {
   const [savedPRs, setSavedPRs] = useState([]);
 
-  // Load saved PRs on mount
   useEffect(() => {
-    const savedData = localStorage.getItem("openPRs");
+    const savedData = localStorage.getItem("closedPRs");
     if (savedData) {
       const parsed = JSON.parse(savedData);
       if (Array.isArray(parsed)) {
@@ -15,45 +14,69 @@ const SavedPRList = () => {
     }
   }, []);
 
-  if (savedPRs.length === 0) {
-    return <p className={styles.empty}>No saved PRs yet.</p>;
-  }
+  // Hardcoded fields
+  const dataToRender =
+    savedPRs.length > 0
+      ? savedPRs
+      : [
+          {
+            username: "—",
+            repo: "—",
+            number: "—",
+            title: "—",
+            author: "—",
+            created: "—",
+            closed: "—",
+            url: "#",
+          },
+        ];
 
   return (
-    <div className={styles.savedList}>
-      <h3>Saved Pull Requests</h3>
-      <div className={styles.listContainer}>
-        {savedPRs.map((entry) => (
-          <div
-            key={`${entry.username}-${entry.repo}-${entry.number}`}
-            className={styles.prItem}
-          >
-            <p>
-              <strong>@{entry.username}</strong> / {entry.repo}
-            </p>
-            <p>
-              #{entry.number} {entry.title}
-            </p>
-            <p>
-              <strong>Author:</strong> @{entry.author}
-            </p>
-            <p>
-              <strong>Created:</strong> {entry.date}
-            </p>
-            <p>
-              <strong>Last Action:</strong> {entry.action}
-            </p>
-            <a
-              href={entry.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.openLink}
-            >
-              Open on GitHub
-            </a>
-          </div>
-        ))}
-      </div>
+    <div className={styles.tableWrapper}>
+      <h3 className={styles.heading}>Saved Closed Pull Requests</h3>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>PR #</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Created</th>
+            <th>Closed</th>
+            <th>Repository</th>
+            <th>Open in GitHub</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dataToRender.map((entry, index) => (
+            <tr key={`${entry.username}-${entry.repo}-${entry.number}-${index}`}>
+              <td>{entry.number}</td>
+              <td>{entry.title}</td>
+              <td>@{entry.author}</td>
+              <td>{entry.created}</td>
+              <td>{entry.closed}</td>
+              <td>
+                {entry.username !== "—"
+                  ? `@${entry.username} / ${entry.repo}`
+                  : "—"}
+              </td>
+              <td>
+                {entry.url !== "#" ? (
+                  <a
+                    href={entry.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.openLink}
+                  >
+                    Open
+                  </a>
+                ) : (
+                  "—"
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
