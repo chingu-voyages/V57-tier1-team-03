@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import SavedPRList from "../components/SavedPrList/SavedPrList";
+import ClosedPrTop from "../components/ClosedPrTop/ClosedPrTop";
 
 const ClosedPRs = () => {
   return (
-    <div class='font-size: 10rem'>ClosedPRs</div>
-  )
-}
+    <>
+      <ClosedPrTop />
+    </>
+  );
+};
 
-export default ClosedPRs
+export default ClosedPRs;
