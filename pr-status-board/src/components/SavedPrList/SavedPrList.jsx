@@ -5,7 +5,7 @@ const SavedPRList = () => {
   const [savedPRs, setSavedPRs] = useState([]);
 
   useEffect(() => {
-    const savedData = localStorage.getItem("closedPRs");
+    const savedData = localStorage.getItem("openPRs");
     if (savedData) {
       const parsed = JSON.parse(savedData);
       if (Array.isArray(parsed)) {
@@ -14,7 +14,7 @@ const SavedPRList = () => {
     }
   }, []);
 
-  // Hardcoded fields
+  // Hardcoded placeholder
   const dataToRender =
     savedPRs.length > 0
       ? savedPRs
@@ -25,15 +25,15 @@ const SavedPRList = () => {
             number: "—",
             title: "—",
             author: "—",
-            created: "—",
-            closed: "—",
+            date: "—",
+            action: "—",
             url: "#",
           },
         ];
 
   return (
     <div className={styles.tableWrapper}>
-      <h3 className={styles.heading}>Saved Closed Pull Requests</h3>
+      <h3 className={styles.heading}>Saved Pull Requests</h3>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -41,7 +41,7 @@ const SavedPRList = () => {
             <th>Title</th>
             <th>Author</th>
             <th>Created</th>
-            <th>Closed</th>
+            <th>Last Action</th>
             <th>Repository</th>
             <th>Open in GitHub</th>
           </tr>
@@ -52,8 +52,8 @@ const SavedPRList = () => {
               <td>{entry.number}</td>
               <td>{entry.title}</td>
               <td>@{entry.author}</td>
-              <td>{entry.created}</td>
-              <td>{entry.closed}</td>
+              <td>{entry.date}</td>
+              <td>{entry.action}</td>
               <td>
                 {entry.username !== "—"
                   ? `@${entry.username} / ${entry.repo}`

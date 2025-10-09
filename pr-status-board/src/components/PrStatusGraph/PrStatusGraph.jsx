@@ -27,7 +27,6 @@ const PRStatusGraph = () => {
 
   return (
     <div>
-      
       <CalendarHeatmap
         startDate={new Date("2025-01-01")}
         endDate={new Date("2025-12-31")}

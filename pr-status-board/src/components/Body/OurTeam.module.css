@@ -94,3 +94,45 @@ span {
   
 }
 }
+
+
+@media  screen and (min-width: 767px) and (max-width: 1023px) {
+  .container {
+  height: 60rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+  .card {
+  width: 20rem;
+  height: 19rem;
+ 
+}
+  .cards {
+  margin-top: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  
+}
+
+}
+
+@media  screen and (min-width: 1024px) {
+  .container {
+  /* height: 60rem; */
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+  .cards {
+  margin-top: 4rem;
+  display: flex;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  
+}
+}

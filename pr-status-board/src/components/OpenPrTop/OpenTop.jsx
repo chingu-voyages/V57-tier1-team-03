@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import styles from "./OpenTop.module.css";
 import PRStatusGraph from "../PrStatusGraph/PrStatusGraph";
 import logo from "../../assets/logo.png";
+import bgImage from "../../assets/Illustration4.png";
+import SavedPRList from "../SavedPrList/SavedPrList";
+
 const OpenPrTop = () => {
   const [username, setUsername] = useState("");
   const [repos, setRepos] = useState([]);
@@ -11,11 +14,11 @@ const OpenPrTop = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // 🔹 Save handler
+  const canSave = Boolean(username && selectedRepo && selectedPR);
+
   const handleSave = () => {
-    console.log("handleSave called", { username, selectedRepo, selectedPR });
-    if (!username || !selectedRepo || !selectedPR) {
-      alert("Nothing to save yet!");
+    if (!canSave) {
+      alert("Please select a username, repository, and PR before saving.");
       return;
     }
 
@@ -45,7 +48,7 @@ const OpenPrTop = () => {
     );
     const updated = [...filtered, prData];
     localStorage.setItem("openPRs", JSON.stringify(updated));
-    console.log("Saved:", updated);
+
     alert(`Saved PR #${selectedPR.number} for ${username}/${selectedRepo}`);
   };
 
@@ -89,60 +92,62 @@ const OpenPrTop = () => {
   };
 
   return (
-    <div className={styles.container}>
-      {/* 🔹 Top Section */}
+    <div
+      className={styles.container}
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center top",
+      }}
+    >
+      {/* --- Top Section --- */}
       <div className={styles.topSection}>
-        {/* Left: Repo + PR Selection */}
         <div className={styles.repoPrBox}>
-          {repos.length > 0 && (
-            <div className={styles.dropdownBox}>
-              <label className={styles.label}>Select Repository</label>
-              <select
-                value={selectedRepo}
-                onChange={(e) => {
-                  const repoName = e.target.value;
-                  setSelectedRepo(repoName);
-                  if (repoName) fetchPRs(repoName);
-                }}
-                className={styles.dropdown}
-              >
-                <option value="">-- Select Repo --</option>
-                {repos.map((repo) => (
-                  <option key={repo.id} value={repo.name}>
-                    {repo.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+          <div className={styles.dropdownBox}>
+            <label className={styles.label}>Select Repository</label>
+            <select
+              value={selectedRepo}
+              onChange={(e) => {
+                const repoName = e.target.value;
+                setSelectedRepo(repoName);
+                if (repoName) fetchPRs(repoName);
+              }}
+              className={styles.dropdown}
+            >
+              <option value="">-- Select Repo --</option>
+              {repos.map((repo) => (
+                <option key={repo.id} value={repo.name}>
+                  {repo.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-          {prs.length > 0 && (
-            <div className={styles.dropdownBox}>
-              <label className={styles.label}>Select PR</label>
-              <select
-                value={selectedPR ? selectedPR.number : ""}
-                onChange={(e) => {
-                  const prNumber = parseInt(e.target.value);
-                  setSelectedPR(
-                    isNaN(prNumber)
-                      ? null
-                      : prs.find((pr) => pr.number === prNumber)
-                  );
-                }}
-                className={styles.dropdown}
-              >
-                <option value="">-- Select PR --</option>
-                {prs.map((pr) => (
-                  <option key={pr.id} value={pr.number}>
-                    #{pr.number} {pr.title}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+          <div className={styles.dropdownBox}>
+            <label className={styles.label}>Select PR</label>
+            <select
+              value={selectedPR ? selectedPR.number : ""}
+              onChange={(e) => {
+                const prNumber = parseInt(e.target.value);
+                setSelectedPR(
+                  isNaN(prNumber)
+                    ? null
+                    : prs.find((pr) => pr.number === prNumber)
+                );
+              }}
+              className={styles.dropdown}
+            >
+              <option value="">-- Select PR --</option>
+              {prs.map((pr) => (
+                <option key={pr.id} value={pr.number}>
+                  #{pr.number} {pr.title}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        {/* Right: Username + Fetch + Save + Logo */}
         <div className={styles.userBox}>
           <input
             type="text"
@@ -155,11 +160,13 @@ const OpenPrTop = () => {
             <button onClick={fetchRepos} className={styles.fetchBtn}>
               Fetch PR’s
             </button>
-            {selectedPR && (
-              <button onClick={handleSave} className={styles.saveBtn}>
-                Save
-              </button>
-            )}
+            <button
+              onClick={handleSave}
+              className={`${styles.saveBtn} ${!canSave ? styles.isDisabled : ""}`}
+              disabled={!canSave}
+            >
+              Save
+            </button>
           </div>
           <div className={styles.logoPlaceholder}>
             <img src={logo} alt="Logo" />
@@ -167,54 +174,67 @@ const OpenPrTop = () => {
         </div>
       </div>
 
-      {/* 🔹 Bottom Section */}
+      {/* --- Bottom Section --- */}
       <div className={styles.bottomSection}>
-        {/* Left: PR Details */}
-        {selectedPR && (
-          <div className={styles.detailsCard}>
-            <h3 className={styles.prTitle}>PR number: #{selectedPR.number}</h3>
-            <p className={styles.detail}>
-              <strong>Title:</strong> {selectedPR.title}
-            </p>
-            <p className={styles.detail}>
-              <strong>Author:</strong> @{selectedPR.user.login}
-            </p>
-            <p className={styles.detail}>
-              <strong>Created:</strong>{" "}
-              {new Date(selectedPR.created_at).toDateString()}
-            </p>
-            <p className={styles.detail}>
-              <strong>Reviewers:</strong>
-              {selectedPR.requested_reviewers.length > 0
-                ? selectedPR.requested_reviewers
-                    .map((r) => `@${r.login}`)
-                    .join(", ")
-                : "None"}
-            </p>
-            <p className={styles.detail}>
-              <strong>Last Action:</strong>
-              {selectedPR.updated_at
-                ? new Date(selectedPR.updated_at).toDateString()
-                : "N/A"}
-            </p>
-            <div className={styles.buttons}>
-              <a
-                href={selectedPR.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.openBtn}
-              >
-                Open in GitHub
-              </a>
-            </div>
-          </div>
-        )}
+  {/* PR Details Card */}
+  <div className={styles.detailsCard}>
+    <h3 className={styles.prTitle}>
+      PR number: #{selectedPR ? selectedPR.number : "—"}
+    </h3>
+    <p className={styles.detail}>
+      <strong>Title:</strong> {selectedPR ? selectedPR.title : "—"}
+    </p>
+    <p className={styles.detail}>
+      <strong>Author:</strong>{" "}
+      {selectedPR ? `@${selectedPR.user.login}` : "—"}
+    </p>
+    <p className={styles.detail}>
+      <strong>Created:</strong>{" "}
+      {selectedPR
+        ? new Date(selectedPR.created_at).toDateString()
+        : "—"}
+    </p>
+    <p className={styles.detail}>
+      <strong>Reviewers:</strong>{" "}
+      {selectedPR
+        ? selectedPR.requested_reviewers.length > 0
+          ? selectedPR.requested_reviewers
+              .map((r) => `@${r.login}`)
+              .join(", ")
+          : "None"
+        : "—"}
+    </p>
+    <p className={styles.detail}>
+      <strong>Last Action:</strong>{" "}
+      {selectedPR && selectedPR.updated_at
+        ? new Date(selectedPR.updated_at).toDateString()
+        : "—"}
+    </p>
 
-        {/* Right: PR Status Graph */}
-        <div className={styles.statusGraph}>
-          <PRStatusGraph />
-        </div>
-      </div>
+    <div className={styles.cardButtons}>
+      <a
+        href={selectedPR ? selectedPR.html_url : "#"}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.openBtn}
+      >
+        Open in GitHub
+      </a>
+      <button className={styles.closeBtn}>Close</button>
+    </div>
+  </div>
+
+  {/* Graph with Title */}
+  <div className={styles.statusGraph}>
+    <div className={styles.graphTitle}>
+      See how we track <span className={styles.pull}>pull</span>{" "}
+      <span className={styles.request}>requests</span>
+    </div>
+    <PRStatusGraph />
+    
+  </div>
+</div>
+
     </div>
   );
 };
