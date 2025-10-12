@@ -37,7 +37,7 @@ const OurVision = () => {
               alt="icon"
             />
             <div className={styles.text}>
-              <h3 className={styles.card_title_2}>Optimized Performance :</h3>
+              <h3 className={styles.card_title_2}>Optimized Performance:</h3>
               <p className={styles.card_text}>
                 Enjoy fast, seamless, and efficient data processing.
               </p>

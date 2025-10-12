@@ -6,26 +6,42 @@ import lastIcon from "../../assets/Relume.png";
 export default function ProcessSection() {
   const items = [
     {
-      goal: "Goal one",
-      summary: "Summary of goal one",
+      action: "Action",
+      goal: "Goal One",
+      summary: "Connect Your Repository",
+      description:
+        "Securely link your GitHub account and choose the repository you want to track.",
     },
     {
-      goal: "Goal two",
-      summary: "Summary of goal two",
+      action: "Action",
+      goal: "Goal Two",
+      summary: "Fetch Open Pull Requests",
+      description:
+        "Quickly load all active PRs into a clean and organized dashboard.",
     },
     {
-      goal: "Goal three",
-      summary: "Summary of goal three",
+      action: "Action",
+      goal: "Goal Three",
+      summary: "Track PR Details",
+      description:
+        "View who created the PR, assigned reviewers, and the latest activity in real time.",
     },
     {
-      goal: "Goal four",
-      summary: "Summary of goal four",
+      action: "Step",
+      goal: "Goal Four",
+      summary: "Save Locally for Testing",
+      description:
+        "Store pull request data directly in your browser so you can continue working even offline.",
     },
     {
-      goal: "Goal five",
-      summary: "Summary of goal five",
+      action: "Action",
+      goal: "Goal Five",
+      summary: "Stay Updated Effortlessly",
+      description:
+        "Monitor both open and closed PRs with clear timelines and simple navigation.",
     },
   ];
+
   return (
     <section className={styles.body}>
       <div className={styles.container}>
@@ -58,12 +74,11 @@ export default function ProcessSection() {
                 />
               </div>
               <div className={styles.textContent}>
-                <p className={styles.goal}>Process • {item.goal}</p>
-                <h3 className={styles.summary}>{item.summary}</h3>
-                <p className={styles.description}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse varius enim in eros elementum tristique.
+                <p className={styles.goal}>
+                  {item.action} • {item.goal}
                 </p>
+                <h3 className={styles.summary}>{item.summary}</h3>
+                <p className={styles.description}>{item.description}</p>
               </div>
             </div>
           ))}

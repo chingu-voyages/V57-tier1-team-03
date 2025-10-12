@@ -1,6 +1,7 @@
 .tableWrapper {
   padding: 40px;
-  background-color: var(--primary-dark-blue);
+  background-color: linear-gradient(180deg, var(--panel-2), var(--panel));
+  border: #94a3b8;
   border-radius: 12px;
   margin-top: 20px;
   overflow-x: auto;

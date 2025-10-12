@@ -27,9 +27,7 @@ export default function HeroSection() {
             <span className={styles.highlight}>Pull Requests</span> Effortlessly
           </h1>
           <p className={styles.subtext}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            varius enim in eros elementum tristique. Duis cursus, mi quis
-            viverra ornare, eros dolor interdum nulla.
+            Simplify your workflow with a single view of all your team’s pull requests, from open to merged — always clear, always up to date
           </p>
         </div>
 

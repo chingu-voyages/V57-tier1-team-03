@@ -45,8 +45,8 @@
 /* Shared card styles */
 .repoPrBox,
 .userBox {
-  background: linear-gradient(180deg, var(--panel-2), var(--panel));
-  border: 1px solid var(--line);
+  background: #0f172a;
+  border: 1px solid #94a3b8;
   border-radius: var(--r-lg);
   padding: 18px;
 }
@@ -78,7 +78,7 @@
   width: 100%;
   height: var(--h);
   border-radius: 10px;
-  border: 1px solid var(--line);
+  border: 1px solid #94a3b8;
   background: linear-gradient(180deg, #0c1934, #0f1e3b);
   color: var(--text);
   padding: 0 12px;
@@ -87,11 +87,31 @@
 
 /* Hover & focus styles for enabled selects */
 .dropdown:not(:disabled):hover {
-  border-color: #2a4770;
+  border-color: #94a3b8;
 }
 
 .dropdown:not(:disabled):focus {
   box-shadow: 0 0 0 3px rgba(82, 227, 255, 0.22);
+}
+
+/* Force darker dropdown list background and option colors */
+.dropdown {
+  background: linear-gradient(180deg, #0b162c, #0e1a34);
+  color: var(--text);
+}
+
+.dropdown option {
+  background-color: #0b162c;
+  color: var(--text);
+}
+
+/* For browsers like Chrome that render <select> with native UI */
+select::-webkit-scrollbar {
+  width: 8px;
+}
+select::-webkit-scrollbar-thumb {
+  background-color: #1e3257;
+  border-radius: 8px;
 }
 
 /* Small info text under each dropdown */
@@ -123,7 +143,7 @@
 .input {
   height: var(--h);
   border-radius: 10px;
-  border: 1px solid var(--line);
+  border: 1px solid #94a3b8;
   background: linear-gradient(180deg, #0c1934, #0f1e3b);
   color: var(--text);
   padding: 0 12px;
@@ -172,8 +192,8 @@
   width: 140px;
   height: 110px;
   border-radius: 12px;
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, var(--panel-3), var(--panel-2));
+  border: 1px solid #94a3b8;
+  background: #0f172a;
   display: grid;
   place-items: center;
 }
@@ -196,8 +216,8 @@
 /* Card layout for details and graph */
 .detailsCard,
 .statusGraph {
-  background: linear-gradient(180deg, var(--panel-2), var(--panel));
-  border: 1px solid var(--line);
+  background: #0f172a !important;
+  border: 1px solid #94a3b8;
   border-radius: 16px;
   padding: 22px;
 }
@@ -223,8 +243,8 @@
 .openBtn {
   height: 44px;
   padding: 0 18px;
-  border-radius: 12px;
-  background: linear-gradient(180deg, #1c2f66, #162754);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #3b82f6, #1e40af);
   color: #e9f1ff;
   text-decoration: none;
   display: inline-flex;
@@ -459,11 +479,12 @@
 }
 
 .closeBtn {
-  background-color: #ef4444;
+  background: linear-gradient(180deg, #ef4444, #b91c1c);
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -515,8 +536,11 @@
   padding: 8px 14px;
   background-color: #3b82f6;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
@@ -526,7 +550,7 @@
   padding: 8px 14px;
   background-color: #00d766;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -573,7 +597,6 @@
   border-radius: 10px;
   padding: 10px;
   min-height: 220px;
-  /* kalendar/heatmap će popuniti površinu */
 }
 
 .graphFooter {
