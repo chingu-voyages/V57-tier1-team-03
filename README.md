@@ -41,8 +41,79 @@ This project includes:
 
 ## How to run PRs Status Board
 
+how_to_run_pr_status_board:
+  description: |
+    Follow these steps to run the PR Status Board project locally on your machine.
+
+  steps:
+    - step: Clone the repository
+      command: git clone https://github.com/chingu-voyages/V57-tier1-team-03.git
+
+    - step: Navigate to the project folder
+      command: cd V57-tier1-team-03
+
+    - step: Install dependencies
+      prerequisites: Node.js version 18 or newer
+      command: npm install
+
+    - step: Start the development server
+      command: npm run dev
+      note: The app will run locally on http://localhost:5173
+
+    - step: Use the app
+      details:
+        - Enter your GitHub username into the input field.
+        - Click “Fetch PR’s” to retrieve repositories and open/closed pull requests.
+        - Choose a repository and select a PR from the dropdown menus.
+        - Click “Save” to persist that PR’s data in browser localStorage.
+        - Navigate between Open PRs and Closed PRs pages to view and analyze PR data.
+        - The heatmap graph visualizes how many PRs were saved per day.
+
+  tech_stack:
+    - React + Vite: Frontend framework and development environment
+    - CSS Modules: Scoped styling for modular and maintainable components
+    - GitHub REST API: Fetching public repositories and pull request data
+    - LocalStorage: Persisting user and PR data locally
+    - react-calendar-heatmap: Visual representation of PR frequency and activity
+
+
 
 ## Dependencies
+
+dependencies:
+  description: |
+    The following dependencies are required to run and build the PR Status Board application.
+
+  core:
+    - name: react
+      version: ^18.0.0
+      purpose: Frontend library for building user interfaces.
+
+    - name: react-dom
+      version: ^18.0.0
+      purpose: DOM rendering and reconciliation for React components.
+
+    - name: vite
+      version: ^5.0.0
+      purpose: Development environment and fast build tool.
+
+  styling:
+    - name: css-modules
+      purpose: Scoped styling for React components.
+
+  data_visualization:
+    - name: react-calendar-heatmap
+      version: ^1.9.0
+      purpose: Displays PR activity as a heatmap graph.
+
+  api_integration:
+    - name: github-rest-api
+      purpose: Fetching repositories and pull request data from GitHub.
+
+  utilities:
+    - name: localStorage (native browser API)
+      purpose: Saving and loading user PR data locally for persistence.
+
 ## Our Team
 
 - Nikola Kojević: [GitHub](https://github.com/n-kojevic) / [LinkedIn](https://www.linkedin.com/in/nikola-kojevic-30a98a121/)
